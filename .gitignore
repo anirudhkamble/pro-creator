@@ -1,0 +1,5 @@
+# Ignore build files
+*.pyc
+build/*
+dist/*
+*/*.egg-info/*
