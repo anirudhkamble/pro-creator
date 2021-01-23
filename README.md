@@ -21,7 +21,7 @@ Create new project skeleton.
 $ project create myNewProject --source source --tests tests --resources resources --basepath /home/myHome
 ########################################################################################################################
 ##### Project `myNewProject` created at location `/home/myHome/myNewProject` 
-/home/myHome
+/home/myHome/myNewProject
 ├── __init__.py
 ├── Makefile
 ├── resources
@@ -38,7 +38,7 @@ $ project create myNewProject --source source --tests tests --resources resource
 
 Destroying the created project.
 ```
-$ project destroy myNewProject --basepath /home/anirudh
-Deleting project `myNewProject` from location `/home/anirudh/myNewProject` ....
+$ project destroy myNewProject --basepath /home/myHome
+Deleting project `myNewProject` from location `/home/myHome/myNewProject` ....
 Deleted
 ```
