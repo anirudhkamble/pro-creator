@@ -11,6 +11,7 @@ class DirectoryManager(object):
 
     def __init__(self, paths=[]):
         super(DirectoryManager, self).__init__()
+        self.paths = paths
 
     def mkdirs(self):
         for path in self.paths:
@@ -29,6 +30,7 @@ class FileManager(object):
 
     def __init__(self, paths=[]):
         super(FileManager, self).__init__()
+        self.paths = paths
 
     def mkfile(self):
         for path in self.paths:
@@ -60,11 +62,10 @@ class FileManager(object):
 class Manager(DirectoryManager, FileManager):
 
     def __init__(self, name, project_path, paths=[]):
-        super(Manager, self).__init__()
+        super(Manager, self).__init__(paths=paths)
         self.name = name
         self.project_path = project_path
-        self.paths = paths
-
+ 
     def init_project(self):
         self.mkdirs()
         self.mkinits()
