@@ -20,8 +20,8 @@ Create new project skeleton.
 ```
 $ project create myNewProject --source source --tests tests --resources resources --basepath /home/myHome
 ########################################################################################################################
-##### Project `myNewProject` created at location `/home/anirudh/myNewProject` 
-/home/anirudh/myHome
+##### Project `myNewProject` created at location `/home/myHome/myNewProject` 
+/home/myHome
 ├── __init__.py
 ├── Makefile
 ├── resources
