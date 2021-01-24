@@ -1,5 +1,5 @@
 
-.PHONY: tests
+.PHONY: build tests
 
 install:
 	python setup.py install

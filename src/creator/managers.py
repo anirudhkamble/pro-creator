@@ -7,19 +7,23 @@ def pathKlass(path):
     return _pathlib.Path(path)
 
 
+def create_file(name):
+    open(name, "wb")
+
+
 class DirectoryManager(object):
 
     def __init__(self, paths=[]):
         super(DirectoryManager, self).__init__()
         self.paths = paths
 
-    def mkdirs(self):
+    def mk_dirs(self):
         for path in self.paths:
             path = pathKlass(path)
             if not path.exists():
                 path.mkdir()
 
-    def rmdirs(self, paths=[]):
+    def rm_dirs(self, paths=[]):
         for path in paths:
             path = pathKlass(path)
             if path.exists():
@@ -32,31 +36,31 @@ class FileManager(object):
         super(FileManager, self).__init__()
         self.paths = paths
 
-    def mkfile(self):
+    def mk_file(self):
         for path in self.paths:
             path = pathKlass(path)
             if not path.parent.exists():
                 path.parent.mkdir()
-            open(str(path), "wb")
+            create_file(str(path))
 
-    def rmfiles(self):
+    def rm_files(self):
         for path in self.paths:
             path = pathKlass(path)
             if path.parent.exists() and path.is_file():
                 _os.remove(str(path))
 
-    def mkinits(self):
+    def mk_inits(self):
         for path in self.paths:
             path = pathKlass(path)
             if not path.parent.exists():
                 path.parent.mkdir()
-            open("%s/__init__.py" % path, "wb")
+            create_file("%s/__init__.py" % path)
 
-    def mkmake(self):
-        open("%s/Makefile" % self.project_path, "wb")
+    def mk_make(self):
+        create_file("%s/Makefile" % self.project_path)
 
-    def mksetup(self):
-        open("%s/setup.py" % self.project_path, "wb")
+    def mk_setup(self):
+        create_file("%s/setup.py" % self.project_path)
 
 
 class Manager(DirectoryManager, FileManager):
@@ -67,10 +71,10 @@ class Manager(DirectoryManager, FileManager):
         self.project_path = project_path
  
     def init_project(self):
-        self.mkdirs()
-        self.mkinits()
-        self.mksetup()
-        self.mkmake()
+        self.mk_dirs()
+        self.mk_inits()
+        self.mk_setup()
+        self.mk_make()
 
     def destroy_project(self):
         print(
