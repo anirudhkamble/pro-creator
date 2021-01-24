@@ -24,10 +24,11 @@ class DirectoryManager(object):
                 path.mkdir()
 
     def rm_dirs(self, paths=[]):
-        for path in paths:
-            path = pathKlass(path)
-            if path.exists():
-                path.rmdir()
+        for path in self.paths:
+            try:
+                _shutil.rmtree(path)
+            except FileNotFoundError:
+                pass
 
 
 class FileManager(object):

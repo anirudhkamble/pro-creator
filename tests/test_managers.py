@@ -1,12 +1,12 @@
-import os
-import shutil
-import unittest
+import os as _os
+import shutil as _shutil
+import unittest as _unittest
 from unittest import TestCase
 
 from creator.managers import DirectoryManager, FileManager, Manager
 
 
-CWD = os.path.abspath("./tests")
+CWD = _os.path.abspath("./tests")
 
 
 class Test_DirectoryManager(TestCase):
@@ -21,15 +21,22 @@ class Test_DirectoryManager(TestCase):
 
     def tearDown(self):
         try:
-            shutil.rmtree(self.paths[0])
+            _shutil.rmtree(self.paths[0])
         except FileNotFoundError:
             pass
 
-    def test_mkdirs(self):
-        self.dm.mkdirs()
+    def test_mk_dirs(self):
+        self.dm.mk_dirs()
         for path in self.paths:
-            self.assertTrue(os.path.exists(path))
+            self.assertTrue(_os.path.exists(path))
+
+    def test_rm_dirs(self):
+        self.dm.mk_dirs()
+        for path in self.paths:
+            self.assertTrue(_os.path.exists(path))
+
+        self.dm.rm_dirs(self.paths)
 
 
 if __name__ == "__main__":
-    unittest.main()
+    _unittest.main()
