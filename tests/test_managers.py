@@ -9,21 +9,30 @@ from creator.managers import DirectoryManager, FileManager, Manager
 CWD = _os.path.abspath("./tests")
 
 
-class Test_DirectoryManager(TestCase):
+class TestBase(TestCase):
 
     def setUp(self):
+        test_dir = "test_dir"
         self.paths = [
-            "%s/%s" % (CWD, "test_dir"),
-            "%s/%s/%s" % (CWD, "test_dir", "dir1"),
-            "%s/%s/%s" % (CWD, "test_dir", "dir2")
+            "%s/%s" % (CWD, test_dir),
+            "%s/%s/%s" % (CWD, test_dir, self.name + "1"),
+            "%s/%s/%s" % (CWD, test_dir, self.name + "2")
         ]
-        self.dm = DirectoryManager(self.paths)
 
     def tearDown(self):
         try:
             _shutil.rmtree(self.paths[0])
         except FileNotFoundError:
             pass
+
+
+class Test_DirectoryManager(TestBase):
+
+    def setUp(self):
+        self.name = "dir"
+        super(Test_DirectoryManager, self).setUp()
+
+        self.dm = DirectoryManager(self.paths)
 
     def test_mk_dirs(self):
         self.dm.mk_dirs()
@@ -36,6 +45,8 @@ class Test_DirectoryManager(TestCase):
             self.assertTrue(_os.path.exists(path))
 
         self.dm.rm_dirs(self.paths)
+        for path in self.paths:
+            self.assertFalse(_os.path.exists(path))
 
 
 if __name__ == "__main__":
